@@ -19,6 +19,7 @@ if(isset($_GET['status']))
 
         }
     }
+
     if(isset($uid)!= null)
     {
         if(isset($_POST['submit']))
@@ -53,7 +54,7 @@ if (window.history.replaceState) {
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>View Seats</title>
   <?php include_once("includes/link.php"); ?>
   <link rel="stylesheet" href="style/style.css">
   <link rel="stylesheet" href="style/viewseats.css">
@@ -196,7 +197,7 @@ if (window.history.replaceState) {
         value="<?php echo $name['amount']; ?>">
       <input placeholder="no1 display seat" type="hidden" name="no1" id="no1" value="<?php echo $name['seatnoextra']?>">
 
-      <h5> Booked seat no: <?php echo $name['seatnoextra']?> [You can't booked this seats] </h5>
+      <h5> Booked seat no: <?php echo $name['seatnoextra']?> [You can't book these seats] </h5>
 
       <?php }} ?>
     </div>

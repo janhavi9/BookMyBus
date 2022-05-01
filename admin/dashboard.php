@@ -67,9 +67,8 @@
                     </div>
                 </div>
                 <div class="row submitbtn">
-                    <!-- action এর নাম বসবে এখানে  ----------------------------------------------------------->
+                   
                     <input type="hidden" name="action" id="action" />
-                    <!-- এখানে আইডি বসবে    ----------------------------------------------------->
                     <input type="hidden" name="user_id" id="user_id" />
                     <input type="submit" name="button_action" id="button_action" value="Insert">
                 </div>

@@ -26,7 +26,7 @@
       }
       if($_POST["action"] == "Edit")  
       {   
-          $object->update_data($_POST);
+          $object->update_data($_POST,$busid);
           echo "Update Successfull";
       }
       if($_POST["action"] == "delete")  
@@ -51,5 +51,5 @@
         }  
       }    
  }
- 
+
  ?>

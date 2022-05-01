@@ -33,9 +33,9 @@ Class busapp
             if($admin_info)
             {
                 $admin_data=mysqli_fetch_assoc($admin_info);
-                if(isset($admin_data['admin_email'])==$admin_email)
+                if($admin_data['admin_email'] == $admin_email)
                 {
-                    header("location:admin/dashcondition.php");
+                    header("location: admin/dashcondition.php");
                     session_start();
                     $_SESSION['adminid']=$admin_data['id'];
                     $_SESSION['adminname']=$admin_data['admin_name'];
@@ -50,7 +50,7 @@ Class busapp
     {
         unset($_SESSION['adminid']);
         unset($_SESSION['adminname']);
-        header("location:../admin.php");
+        header("location: ../admin.php");
     }
 
     public function display_bus()
@@ -72,7 +72,7 @@ Class busapp
                 <th></th>
             </tr>
             ';
-            while($row=mysqli_fetch_object($result))
+           while($row=mysqli_fetch_object($result))
             {
                 $output .= '
                 
@@ -97,8 +97,8 @@ Class busapp
                             Action
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item seatbooking" href="seatbooking.php?status=booking&&id='.$row->bus_id.'">Seat Booking</a>
-                            <a class="dropdown-item update" href="#" id="'.$row->bus_id.'">Edit</a>
+                            <a class="dropdown-item seatbooking" href="seatbooking.php?status=booking&&id='.$row->bus_id.'">Edit Cost/Boarding point</a>
+                            <a class="dropdown-item update" href="editbus.php?status=booking&&id='.$row->bus_id.'">Edit Bus Details</a>
                             <a class="dropdown-item delete" href="#" id="'.$row->bus_id.'">Delete</a>
                         </div>
                     </div>
@@ -166,7 +166,7 @@ Class busapp
             }    
         }
     }
-    public function update_data($data)
+    public function update_data($data,$busid)
     {
         $busname = $data['busname'];
         $fromroute = $data['fromroute'];
@@ -178,15 +178,14 @@ Class busapp
         $picture = $_FILES['picture']['name'];
         $tmp_name = $_FILES['picture']['tmp_name'];
 
-        $query = "UPDATE add_bus SET bus_name = '".$busname."',from_route = '".$fromroute."',to_route = '".$toroute."',bus_date = '".$dateroute."',departure = '".$dtimeroute."',arrival = '".$atimeroute."',bus_type = '".$bustype."',picture ='".$picture."' WHERE bus_id='".$_POST["user_id"]."'";
+        $query = "UPDATE add_bus SET bus_name = '".$busname."',from_route = '".$fromroute."',to_route = '".$toroute."',bus_date = '".$dateroute."',departure = '".$dtimeroute."',arrival = '".$atimeroute."',bus_type = '".$bustype."',picture ='".$picture."' WHERE bus_id='".$busid."'";
 
         if(mysqli_query($this->conn,$query))
         {
             move_uploaded_file($tmp_name,'upload/'.$picture);
-            return "update successfull";
+            echo "<script>alert('Updated successfully');</script>";
         }
     }
-
     public function delete_data($catch_img,$query,$query1,$query2,$query3)
     {
         if((mysqli_query($this->conn,$query)) && (mysqli_query($this->conn,$query1)) && (mysqli_query($this->conn,$query2)) && (mysqli_query($this->conn,$query3)))

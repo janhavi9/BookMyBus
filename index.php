@@ -99,15 +99,15 @@ if(isset($_GET['userlogout']))
   <!-- welcome part end -->
 
   <!-- schedule part start -->
-  <section class="container">
+  <section class="container" style="align-items: center;">
     <form action="bushow.php" method="POST">
       <div class="row">
         <div class="col">
-          <div class="schedulebox px-2">
-            <div class="row scheduleinner">
-              <div class="col-lg-3 col-sm-6 col-xs-12">
+          <div class="schedulebox px-2" >
+            <div class="row scheduleinner" style="align-items: center;">
+              <div class="col-lg-3 col-sm-6 col-xs-12" >
 
-                <div class="form-group">
+                <div class="form-group" style="align-items: center;">
                   <input class="form-control" type="text" name="fromroute" id="fromroute" placeholder="  From">
                   <i class="fas fa-map-marker-alt"></i>
                 </div>
@@ -115,7 +115,7 @@ if(isset($_GET['userlogout']))
               </div>
               <div class="col-lg-3 col-sm-6  col-xs-12">
 
-                <div class="form-group">
+                <div class="form-group" style="align-items: center;">
                   <input class="form-control" type="text" name="toroute" id="toroute" placeholder="  To">
                   <i class="fas fa-map-marker-alt"></i>
                 </div>
@@ -123,7 +123,7 @@ if(isset($_GET['userlogout']))
               </div>
               <div class="col-lg-3 col-sm-6 col-xs-12">
 
-                <div class="form-group">
+                <div class="form-group" style="align-items: center;">
                   <input class="form-control" type="text" name="dateroute" id="dateroute" placeholder="  Date"
                     onfocus="(this.type='date')">
                   <i class="far fa-calendar-alt"></i>
@@ -132,11 +132,11 @@ if(isset($_GET['userlogout']))
               </div>
               <div class="col-lg-3 col-sm-6  col-xs-12">
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <input class="form-control" type="text" placeholder="  Return Date(optional)" disabled
                     onfocus="(this.type='date')">
                   <i class="far fa-calendar-alt"></i>
-                </div>
+                </div> -->
 
               </div>
             </div>
@@ -207,15 +207,6 @@ if(isset($_GET['userlogout']))
     </div>
   </section>
 
-  <section>
-    <div class="animationbox">
-      <div class="anibox"></div>
-      <div class="anibox"></div>
-      <div class="anibox"></div>
-      <div class="anibox"></div>
-      <div class="anibox"></div>
-    </div>
-  </section>
   <!-- Description end -->
 
   <!-- customer reviews start -->

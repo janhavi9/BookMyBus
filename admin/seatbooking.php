@@ -58,9 +58,6 @@
           <Form class="forminput" name="add_info" id="add_info" method="post">
             <input type="hidden" name="id" id="id" value="<?php echo $recvdata['bus_id']; ?>">
             <input type="hidden" name="bus_name" id="bus_name" value="<?php echo $recvdata['bus_name']; ?>">
-            <label for=""> <strong>Seat number:</strong></label>
-            <input class="form-control mb-3" type="number" name="seatnumber" id="seatnumber" placeholder="Enter Seat Number"
-              pattern="[0-9]" required>
             <label for=""> <strong>Seat Price:</strong></label>
             <input class="form-control mb-3" type="number" name="price" id="price" placeholder="Enter Price"
               pattern="[0-9]" required>
@@ -68,8 +65,7 @@
             <div class="boarding" id="dynamic_field">
               <div class="row mb-3">
                 <div class="col-9">
-                  <input type="text" name="name[]" placeholder="Boarding Point Name:" class="form-control address_list"
-                    required />
+                  <input type="text" name="name[]" placeholder="Boarding Point Name:" class="form-control address_list" required />
                 </div>
                 <div class="col-3">
                   <button type="button" name="add" id="add" class="btn btn-success"><i

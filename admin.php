@@ -15,7 +15,7 @@ if(isset($_POST['adminbutton']))
     
     if(isset($id))
     {
-        header("location:admin/dashcondition.php");
+        header("location:./admin/dashcondition.php");
     }
 ?>
 
@@ -38,7 +38,7 @@ if(isset($_POST['adminbutton']))
                <div class="loginright">
                <div class="header">
                     <h3>Admin Login</h3>
-                    <small>Don't share this link</small>
+                    <!-- <small>Don't share this link</small> -->
                 </div>
                 <form action="" method="post" class="formadmin">
                     <div class="form-group">

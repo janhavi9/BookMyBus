@@ -66,8 +66,8 @@ if(isset($_SESSION['busname']))
         <div class="row">
           <div class="col-12 tag"><h4> <span style='font-size:25px;'>&#9996;</span> Happy Journey <span style='font-size:25px;'>&#9996;</span></h4></div>
           <div class="col-12">
-            <h5>© 2021 MyWay. All rights reserved. Design and Developed by <a style="color:#e7e7e7" ;
-            href="https://github.com/tanmoy108" target="_blank">shtanmoy</a></h5>
+            <!-- <h5>© 2021 MyWay. All rights reserved. Design and Developed by <a style="color:#e7e7e7" ;
+            href="https://github.com/tanmoy108" target="_blank">shtanmoy</a></h5> -->
           </div>
         </div>
       </footer>

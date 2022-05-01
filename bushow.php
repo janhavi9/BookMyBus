@@ -166,7 +166,7 @@ if(isset($_POST['submit']))
           <?php 
           } ?>
           <a class="btn seatbtn" href="viewseats.php?status=viewseats&&id=<?php echo $row2['bus_id']?>"
-            target="_blank">View Seats</a>
+            target="">View Seats</a>
         </div>
       </div>
     </div>

@@ -28,7 +28,7 @@ if(isset($uid))
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>BookMyBus</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -51,10 +51,10 @@ if(isset($uid))
 
 <body onload="myfunction()">
     <div id="loading"></div>
+    <a class="navbar-brand" href="./index.php"><img style="width:150px" ; src="./image/logo black.png" alt=""></a>
     <div class="container">
         <div class="forms-container">
-        <a class="navbar-brand" href="./index.php"><img style="width:150px" ; src="./image/logo black.png" alt=""></a>
-            <div class="signin-signup">
+            <div class="signin-signup" style="overflow-y: hidden;">
                 <form action="" method="post" class="sign-in-form">
                     <h2 class="title">SIGN IN</h2>
                     <div class="input-field">
