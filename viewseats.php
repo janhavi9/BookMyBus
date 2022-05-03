@@ -179,7 +179,7 @@ if (window.history.replaceState) {
       <div class="row" id="maindiv" name="maindiv">
       </div>
       <!-- show seat end ....... -->
-      <button class="btn submitbtn " name="submit" id="submit"><b>GET TICKET</b></button><br><br>
+      <button class="btn submitbtn " name="submit" id="submit" ><b>GET TICKET</b></button><br><br>
       <!-- ------display from seat database------ -->
       <!-- <p> display from seat no1</p> -->
       <?php

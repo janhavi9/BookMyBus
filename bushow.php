@@ -158,14 +158,14 @@ if(isset($_POST['submit']))
         <strong>Departure Time: <small><?php echo $row['departure']?></small> </strong><br>
         <strong>Arrival Time: <small><?php echo $row['arrival']?></small> </strong><br>
         <?php if(isset($row2['seatsize']) && isset($row2['price'] )){ ?>
-        <strong>Seat Capacity: <small><?php echo $row2['seatsize']?></small></strong>
+       
       </div>
       <div class="col-lg-4 col-md-3 col-sm-12 d-flex align-items-end justify-content-end bottomedia my-2">
         <div class="d-flex align-items-center flex-column">
           <h5><?php echo $row2['price']?> ₹</h5>
           <?php 
           } ?>
-          <a class="btn seatbtn" href="viewseats.php?status=viewseats&&id=<?php echo $row2['bus_id']?>"
+          <a class="btn seatbtn" href="seat.php?status=viewseats&&id=<?php echo $row2['bus_id']?>"
             target="">View Seats</a>
         </div>
       </div>

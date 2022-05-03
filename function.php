@@ -90,7 +90,6 @@ Class busapp
                 <td>'.$row->bus_type.'</td>
                 <td> <img style="height:100px;" src="upload/'.$row->picture.'" alt="busimage"> </td>
                 <td>
-
                 <div class="dropdown">
                         <button class="btn actionbtn  dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -343,10 +342,9 @@ Class busapp
     {
         $id = $data['id'];
         $name = $data['bus_name'];
-        $seatnumber = $data['seatnumber'];
         $price = $data['price'];
 
-        $query = "INSERT INTO bus_inside(bus_id,bus_name,price,seatsize)VALUES($id,'$name',$price,$seatnumber)";
+        $query = "INSERT INTO bus_inside(bus_id,bus_name,price)VALUES($id,'$name',$price)";
         if(mysqli_query($this->conn,$query))
         {
             echo "success price";
@@ -413,7 +411,7 @@ Class busapp
             {
             ?>
                 <script>
-                    alert('you can not booked seat now');
+                    alert('you can not book seat now');
                 </script>
             <?php }
         else

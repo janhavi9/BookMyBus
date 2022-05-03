@@ -74,7 +74,7 @@ if(isset($_SESSION['busname']))
   </div>
 
   <script>
-var mywindow = window.open("", ...);
+var mywindow = window.open("", );
 mywindow.document.write("...");
 mywindow.document.close();
 setTimeout(function() {
