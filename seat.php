@@ -20,6 +20,8 @@ if(isset($_GET['status']))
     }
 }
 
+
+
 if(isset($_GET['userlogout']))
     {
         if($_GET['userlogout']=='logout')
@@ -29,14 +31,15 @@ if(isset($_GET['userlogout']))
     }
 ?>
 <html>
-	<head>
-    <?php include_once("includes/link.php"); ?>
-  <link rel="stylesheet" href="style/style.css">
-  <link rel="stylesheet" href="style/viewseats.css">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<title>Select Seats</title>	
-    <script src="jquery.js" type="text/javascript"></script>
-		<script type="text/javascript">
+<head>
+<?php include_once("includes/link.php"); ?>
+<link rel="stylesheet" href="style/style.css">
+<link rel="stylesheet" href="style/viewseats.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<title>Select Seats</title>	
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+
 			$(document).ready(function(){
 				$(".reserved input").prop('checked', true);
 				$(".reserved input").prop('disabled', true);
@@ -54,8 +57,7 @@ if(isset($_GET['userlogout']))
 					}
 				})
 			});
-		</script>
-		<script type="text/javascript" >
+		
 		var x=0;
 		var text="";
 		var text1="";
@@ -115,14 +117,10 @@ if(isset($_GET['userlogout']))
 						$('#selectedtext').val(text);
 						var count = $("[type='checkbox']:checked").length-1;
 						$('#count').val(count);
-						$('#fare').val(count*400);
+						$("#fare").val("100");
 					});
 				}
 			});
-
-            if (window.history.replaceState) {
-  window.history.replaceState(null, null, window.location.href)
-}
 		</script>
 		<style>
 			label{
@@ -147,6 +145,11 @@ if(isset($_GET['userlogout']))
 				background-image:url(image/booked.png);
 				color:white;
 			}
+            .reserved .cust-checkbox:checked + span{
+				background-image:url(image/booked.png);
+				color:white;
+			}
+
 			.selected .cust-checkbox + span{
 				background-image:url(image/seat_selected.png);
 				color:white;
@@ -159,11 +162,15 @@ if(isset($_GET['userlogout']))
 				height: 30px;
 				width: 30px;
 				display:block;
+                background-image: url(image/seat_selected.png);
+
+                
 			}
 			.cust-checkbox:disabled + span{
 				height: 30px;
 				width: 30px;
 				display:block;
+                
 			}
 			.seats{
 				border: px solid #ccc;
@@ -178,10 +185,8 @@ if(isset($_GET['userlogout']))
 			.col-sm-4{text-align:center;font-size:12px;margin-left:auto;margin-right:auto;}
 		</style>
 		
-	</head>
-    <body>
-    </body>
-</html>
+</head>
+<body>
 <?php
 if(isset($returnvalue))
 {
@@ -203,7 +208,7 @@ $response = "<div>";
 	 $start = $row2['from_route'];
 	 $end = $row2['to_route'];
 	 $fare = $row['price'];
-	 $booked_seat = 'a6b2c3';
+	 $booked_seat = $row['booked'];
 	 $i=0;
 	 $book_seat_no=str_split($booked_seat);
 	 $seat=array();
@@ -235,7 +240,7 @@ $response = "<div>";
 		 $i++;
 	 }
 	 $available_seat=40-count($seat);
-	$response .="<form action='buy_seat.php' name='seats' method='POST'>
+	$response .="<form action='' name='seats' method='POST'>
 				<div class='container-fluid' style='position:absolute;top:40px'>
 					<div class='row'>
 						<div class='col-lg-3' style='padding-left:2%;padding-bottom:2%;list-style:none;'>
@@ -311,47 +316,101 @@ $response = "<div>";
 								</div>
 						</div>
 						</div>
-                        <div class='col-lg-5' style='padding-left:5%;'>
-						<button class='btn btn-sm' style='margin-top:5%;background-color:#079d49;color:white;' name='submit' >Book Seat</button>
-                        </div>
+                        
 					</div>
 				</div>
 			</form>";
 #}
 $response .= "</div>";?>
-<div style="position: fixed; left:30px;top:300px;">
-      <?php if(isset($return))
+<div style="position: fixed; left:30px;top:300px;z-index:100;">
+<form action="" method="POST">
+<?php if(isset($return))
         {
             echo "Success";
         } ?>
       <div id="msg" name="msg"></div>
+      <input name="busidno" id="busidno" type="hidden" value="<?php echo $row['bus_id'] ?>">
       <p>Bus Name: </p>
-      <input class="form-control disabled" type="text" value="<?php echo $row['bus_name'] ?>" readonly="readonly" required >
+      <input class="form-control disabled" id="busname" name="busname" type="text" value="<?php echo $row['bus_name'] ?>" readonly="readonly" required >
       <p>Customer User Name: </p>
-      <?php
-            if(isset($uid))
-            {?>
-      <input class="form-control disabled" type="text" value="<?php echo $uname ?>" disabled required >
-      <?php }
-            else
-            { ?>
+<?php if(isset($uid))
+{?>
+	  <input name="useridno" id="useridno" type="hidden" value="<?php echo $uid ?>">
+      <input class="form-control disabled" id="uname" name="uname" type="text" value="<?php echo $uname ?>" disabled required >
+<?php }
+else
+{ ?>
       <input class="form-control" type="text" value="Sign In First" disabled>
-      <?php }
-            ?>
+<?php }
+?>
       <p>Ticket no: </p>
-      <input class="form-control" type="text" name="seatno" id="seatno" readonly="readonly" required >
-      <p>Amount:</p>
-      <input class="form-control" type="text" name="seatamount" id="seatamount" readonly="readonly" required>
-<label>Choose Boarding Point:</label>
+      <input class="form-control" type="text" name="seatno" id="seatno"  required >
+      <!-- <p>Amount:</p>
+      <input class="form-control" type="text" name="seatamount" id="fare"   required> -->
+<p>Choose Boarding Point:</p>
 <select class='form-control' id='busboarding' name='busboarding' required>
 <?php while($point = mysqli_fetch_assoc($boarding))
 { ?>
-<option> <?php echo $point['boarding_pnt'];?> </option>
+<option><?php echo $point['boarding_pnt'];?></option>
 <?php }
 ?>
 </select>
+<div class='col-lg-5' style='padding-left:5%;'>
+<button class='btn btn-sm' style='margin-top:5%;background-color:#079d49;color:white;' name="book" id="book" >Book Seat</button>
+<?php
+$dbhost = "localhost";
+$dbuser = "root";
+$dbpassword = "";
+$dbname = "bus_management";
+$conn = mysqli_connect($dbhost,$dbuser,$dbpassword,$dbname);
+if(isset($_POST['book'])){
+	$bid=$_POST['busidno'];
+	$bname=$_POST['busname'];
+	$uid=$_POST['useridno'];
+	$seat=$_POST['seatno'];
+	$bpoint=$_POST['busboarding'];
+    $result= $object->view_cost($bid);
+	$row=mysqli_fetch_assoc($result);
+	$cost=intval($row['price']);
+    $seat_no=explode (",", $seat); 
+	$l=count($seat_no);
+	$amount=$cost*$l;
+	$query="INSERT INTO booking(bid,bname,uid,uname,seats,bpoint,amount) VALUES('$bid','$bname','$uid','$uname','$seat','$bpoint','$amount')";
+	$q1=mysqli_query($conn,"SELECT * FROM bus_inside WHERE bus_id='$bid'");
+	$row2=mysqli_fetch_assoc($q1);
+	$new=$row2['booked'];
+	$snew=str_replace(',', '', $seat);
+	$new .=$snew; 
+	$q2=mysqli_query($conn,"UPDATE bus_inside SET booked='$new' WHERE bus_id='$bid'");
+	if((mysqli_query($conn , $query))){
+		echo "<script>alert('seats ".$seat." booked for amount: Rs.".$amount." /-.');
+		window.location.href='thankyou.php'</script>";
+		// $query1= "SELECT * FROM booking WHERE bid='$busid' AND uid='$uid' ";
+        // if(mysqli_query($conn,$query1)){
+		// 	$info = mysqli_query($conn,$query1);
+        //             if($info)
+        //             {
+		// 					$seatinfo = mysqli_fetch_assoc($info);
+		// 					$_SESSION['bid'] = $seatinfo['bid'];
+        //                     $_SESSION['bname'] = $seatinfo['bname'];
+		// 					$_SESSION['uid'] = $seatinfo['uid'];
+        //                     $_SESSION['uname'] = $seatinfo['uname'];
+        //                     $_SESSION['bpoint'] = $seatinfo['bpoint'];
+        //                     $_SESSION['seats'] = $seatinfo['seats'];
+		// 					$_SESSION['amount'] = $seatinfo['amount'];
+                    
+		// 			}
+		// }
+	}
+}
+?>
+</div>
+</form>
 </div>
 <?php
 echo $response;
 exit;
+?>
+</body>
+</html>
 

@@ -18,10 +18,12 @@ if(isset($_GET['userlogout']))
 if(isset($_POST['submit']))
 {
     $frominfo = $_POST["fromroute"];
+    $from=metaphone($frominfo);
     $toinfo = $_POST["toroute"];
+    $to=metaphone($toinfo);
     $dateinfo =$_POST["dateroute"];
-    $result1 = $obj->bushow("SELECT * FROM add_bus WHERE from_route ='$frominfo' AND to_route ='$toinfo' AND bus_date ='$dateinfo'");
-    $result = $obj->bushow("SELECT * FROM add_bus WHERE from_route ='$frominfo' AND to_route ='$toinfo' AND bus_date ='$dateinfo'");
+    $result1 = $obj->bushow("SELECT * FROM add_bus WHERE from_index ='$from' AND to_index ='$to' AND bus_date ='$dateinfo'");
+    $result = $obj->bushow("SELECT * FROM add_bus WHERE from_index ='$from' AND to_index ='$to' AND bus_date ='$dateinfo'");
 }
 
 ?>
@@ -53,10 +55,10 @@ if(isset($_POST['submit']))
           <a class="nav-link text-uppercase font-weight-bold" href="index.php">Home</a>
         </li>
         <li class="nav-item mx-4 my-2">
-          <a class="nav-link text-uppercase font-weight-bold" href="index.php">Reviews</a>
+          <a class="nav-link text-uppercase font-weight-bold" href="feed.php">Reviews</a>
         </li>
         <li class="nav-item mx-4 my-2">
-          <a class="nav-link text-uppercase font-weight-bold" href="team.php">Team</a>
+          <a class="nav-link text-uppercase font-weight-bold" href="#">Team</a>
         </li>
       </ul>
       <?php 
@@ -76,6 +78,7 @@ if(isset($_POST['submit']))
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="?userlogout=logout">Logout</a>
+          <a class="dropdown-item" href="view.php">View Bookings</a>
         </div>
       </div>
       <?php
@@ -166,7 +169,7 @@ if(isset($_POST['submit']))
           <?php 
           } ?>
           <a class="btn seatbtn" href="seat.php?status=viewseats&&id=<?php echo $row2['bus_id']?>"
-            target="">View Seats</a>
+            target="_blank">View Seats</a>
         </div>
       </div>
     </div>

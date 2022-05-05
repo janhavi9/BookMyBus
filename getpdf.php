@@ -1,14 +1,42 @@
 <?php 
 include("function.php");
-$objindex = new busapp();
+$object = new busapp();
+
 session_start();
+if(isset($_SESSION['id']))
+{
+  $uid = $_SESSION['id'];
+  $uname = $_SESSION['username'];
+}
+
+if(isset($_GET['status']))
+{
+    if($_GET['status']='getpdf')
+    {
+        $busid = $_GET['id'];
+        // $busname = $_GET['bus_name'];
+        $returnvalue=$object->view_seats($busid);
+
+    }
+}
+
+
+if(isset($_GET['userlogout']))
+    {
+        if($_GET['userlogout']=='logout')
+        {
+          $object->user_logout();
+        }
+    }
+
 if(isset($_SESSION['busname']))
 {
-  $busname = $_SESSION['busname'];
-  $username = $_SESSION['username'];
-  $boardingpoint=$_SESSION['boarding'];
-  $seatnumber=$_SESSION['seatnumber'];
-  $price=$_SESSION['price'];
+  $busid = $_SESSION['bid'];
+  $busname = $_SESSION['bname'];
+  $username = $_SESSION['uname'];
+  $boardingpoint=$_SESSION['bpoint'];
+  $seatnumber=$_SESSION['seats'];
+  $amount=$_SESSION['amount'];
 }
 ?>
 <!doctype html>
@@ -56,7 +84,7 @@ if(isset($_SESSION['busname']))
               </tr>
               <tr>
                 <th scope="row">Amount</th>
-                <td><?php echo $price ?></td>
+                <td><?php echo $amount ?></td>
               </tr>
             </tbody>
           </table>

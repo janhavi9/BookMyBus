@@ -113,7 +113,9 @@ Class busapp
     {
         $busname = $busdata['busname'];
         $fromroute = $busdata['fromroute'];
+        $from=metaphone($fromroute);
         $toroute = $busdata['toroute'];
+        $to = metaphone($toroute);
         $dateroute = $busdata['dateroute'];
         $dtimeroute = $busdata['dtimeroute'];
         $atimeroute = $busdata['atimeroute'];
@@ -121,7 +123,7 @@ Class busapp
         $picture = $_FILES['picture']['name'];
         $tmp_name = $_FILES['picture']['tmp_name'];
 
-        $query = "INSERT INTO add_bus(bus_name,from_route,to_route,bus_date,departure,arrival,bus_type,picture) VALUES ('$busname','$fromroute','$toroute','$dateroute','$dtimeroute','$atimeroute','$bustype','$picture')";
+        $query = "INSERT INTO add_bus(bus_name,from_route,to_route,bus_date,departure,arrival,bus_type,picture,from_index,to_index) VALUES ('$busname','$fromroute','$toroute','$dateroute','$dtimeroute','$atimeroute','$bustype','$picture','$from','$to')";
 
         if(mysqli_query($this->conn,$query))
         {
@@ -169,7 +171,9 @@ Class busapp
     {
         $busname = $data['busname'];
         $fromroute = $data['fromroute'];
+        $from=metaphone($fromroute);
         $toroute = $data['toroute'];
+        $to = metaphone($toroute);
         $dateroute = $data['dateroute'];
         $dtimeroute = $data['dtimeroute'];
         $atimeroute = $data['atimeroute'];
@@ -177,7 +181,7 @@ Class busapp
         $picture = $_FILES['picture']['name'];
         $tmp_name = $_FILES['picture']['tmp_name'];
 
-        $query = "UPDATE add_bus SET bus_name = '".$busname."',from_route = '".$fromroute."',to_route = '".$toroute."',bus_date = '".$dateroute."',departure = '".$dtimeroute."',arrival = '".$atimeroute."',bus_type = '".$bustype."',picture ='".$picture."' WHERE bus_id='".$busid."'";
+        $query = "UPDATE add_bus SET bus_name = '".$busname."',from_route = '".$fromroute."',to_route = '".$toroute."',bus_date = '".$dateroute."',departure = '".$dtimeroute."',arrival = '".$atimeroute."',bus_type = '".$bustype."',picture ='".$picture."',from_index ='".$from."',to_index ='".$to."' WHERE bus_id='".$busid."'";
 
         if(mysqli_query($this->conn,$query))
         {
@@ -383,6 +387,25 @@ Class busapp
             return $seat;
         }
     }
+    public function view_booked($bid,$uid)
+    {
+        $query= "SELECT * FROM booking WHERE 'bid'=$bid AND 'uid'=$uid";
+        if(mysqli_query($this->conn,$query))
+        {
+            $seat = mysqli_query($this->conn,$query);
+            return $seat;
+        }
+        
+    }
+    public function view_cost($id)
+    {
+        $query="SELECT * FROM bus_inside WHERE bus_id=$id";
+        if(mysqli_query($this->conn,$query))
+        {
+            $seat = mysqli_query($this->conn,$query);
+            return $seat;
+        }
+    }
     
     public function getpdf($a,$b)
     {
@@ -465,7 +488,7 @@ Class busapp
     }
     public function show_seat()
     {
-        $query = "SELECT * FROM seat";
+        $query = "SELECT * FROM booking";
         $output = ''; 
         if(mysqli_query($this->conn,$query))
         {
@@ -473,6 +496,8 @@ Class busapp
             $output .= '
             <table>
             <tr>
+                <th>Booking ID</th>
+                <th>Bus ID</th>
                 <th>Bus Name</th>
                 <th>User Name</th>
                 <th>Boarding Point</th>
@@ -484,11 +509,44 @@ Class busapp
             {
                 $output .= '
                 
+                <td>'.$row->id.'</td>
+                <td>'.$row->bid.'</td>
+                <td>'.$row->bname.'</td>
+                <td>'.$row->uname.'</td>
+                <td>'.$row->bpoint.'</td>
+                <td>'.$row->seats.'</td>
+                <td>'.$row->amount.'</td>
+            </tr> ';
+            }
+            $output .= ' </table>';
+            return $output;
+        }
+    }
+
+    public function user_seat($uid)
+    {
+        $query = "SELECT * FROM booking where uid='$uid'";
+        $output = ''; 
+        if(mysqli_query($this->conn,$query))
+        {
+            $result = mysqli_query($this->conn,$query);
+            $output .= '
+            <table>
+            <tr>
+                <th>Bus Name</th>
+                <th>Boarding Point</th>
+                <th>Seat no</th>
+                <th>Amount</th>
+            </tr>
+            ';
+            while($row=mysqli_fetch_object($result))
+            {
+                $output .= '
+                
                 <tr>
-                <td>'.$row->bus_name.'</td>
-                <td>'.$row->user_name.'</td>
-                <td>'.$row->boardingpnt.'</td>
-                <td>'.$row->seatno.'</td>
+                <td>'.$row->bname.'</td>
+                <td>'.$row->bpoint.'</td>
+                <td>'.$row->seats.'</td>
                 <td>'.$row->amount.'</td>
             </tr> ';
             }

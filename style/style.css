@@ -106,28 +106,31 @@ body {
   height: max-content;
   width: 100%;
   background-color: #ffffff;
-  position: inherit;
+  position: absolute;
+  left: 200px;
   border-radius: 10px;
   bottom: 40px;
   box-shadow: 2px 2px 20px rgb(173, 173, 173);
-  display: flex;
+
   justify-content: center;
 }
 .scheduleinner {
+  position: absolute;
+  left: 300px;
   margin-top: 14px;
 }
 .schedulebox .scheduleinner input {
-  padding-left: 25px;
+  position: absolute;
+  left: 200px;
+  padding-left: 40px;
   border-radius: 5px;
   height: 50px;
-  display: flex;
-  align-items: center;
   outline: 0;
   border: none;
 }
 
 .schedulebox .scheduleinner i {
-  position: absolute;
+ 
   bottom: 34px;
   margin-left: 7px;
   color: rgb(110, 110, 110);
@@ -193,6 +196,8 @@ body {
 .box2,
 .box3,
 .box4 {
+  position: absolute;
+  left: 100px;
   height: 100px;
   width: 100px;
   background-color: #f8f7f7;
